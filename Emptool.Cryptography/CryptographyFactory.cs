@@ -247,6 +247,60 @@ namespace Emptool.Cryptography
             }
         }
 
+        public byte[] Encrypt(byte[] inputDataBytes, out System.Security.Cryptography.RSAParameters rsaParameters)
+        {
+            byte[] encryptedData;
+
+            using (System.Security.Cryptography.RSACryptoServiceProvider csp = new System.Security.Cryptography.RSACryptoServiceProvider())
+            {
+                
+                // Return the full set of public and private keys
+                rsaParameters = csp.ExportParameters(true);
+
+                //Import only the public key information
+                //csp.ImportParameters(csp.ExportParameters(false));
+
+                // Encrypt the passed byte array and specify OAEP padding.  
+                // OAEP padding is only available on Microsoft Windows XP or later.  
+                encryptedData = csp.Encrypt(inputDataBytes, false);
+            }
+
+            return encryptedData;
+        }
+
+        public byte[] Encrypt(byte[] inputDataBytes, System.Security.Cryptography.RSAParameters rsaParameters)
+        {
+            byte[] encryptedData;
+
+            using (System.Security.Cryptography.RSACryptoServiceProvider csp = new System.Security.Cryptography.RSACryptoServiceProvider())
+            {
+                // Import public key information.
+                csp.ImportParameters(rsaParameters);
+
+                // Encrypt the passed byte array and specify OAEP padding.  
+                // OAEP padding is only available on Microsoft Windows XP or later.  
+                encryptedData = csp.Encrypt(inputDataBytes, false);
+            }
+
+            return encryptedData;
+        }
+
+        public byte[] Decrypt(byte[] inputDataBytes, System.Security.Cryptography.RSAParameters rsaParameters)
+        {
+            byte[] decryptedData;
+            //Create a new instance of RSACryptoServiceProvider.
+            using (System.Security.Cryptography.RSACryptoServiceProvider csp = new System.Security.Cryptography.RSACryptoServiceProvider())
+            {
+                // Import public key information.
+                csp.ImportParameters(rsaParameters);
+
+                // Decrypt the passed byte array and specify OAEP padding.  
+                // OAEP padding is only available on Microsoft Windows XP or later.  
+                decryptedData = csp.Decrypt(inputDataBytes, false);
+                
+            }
+            return decryptedData;
+        }
 
         public enum KeyedHashAlgorithmName
         {
@@ -393,7 +447,7 @@ namespace Emptool.Cryptography
             }
         }
 
-
+        
     }
 
 
