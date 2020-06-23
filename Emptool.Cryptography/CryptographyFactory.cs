@@ -247,6 +247,73 @@ namespace Emptool.Cryptography
             }
         }
 
+
+        public enum KeyedHashAlgorithmName
+        {
+            HMACSHA256,
+            HMACSHA512
+        }
+
+        public byte[] Hash(KeyedHashAlgorithmName algName, byte[] inputDataBytes, byte[] keyBytes)
+        {
+            switch (algName)
+            {
+                case KeyedHashAlgorithmName.HMACSHA512:
+                    using (System.Security.Cryptography.HMACSHA512 hasher = new System.Security.Cryptography.HMACSHA512(keyBytes))
+                    {
+                        return hasher.ComputeHash(inputDataBytes);
+                    }
+                case KeyedHashAlgorithmName.HMACSHA256:
+                default:
+                    using (System.Security.Cryptography.HMACSHA256 hasher = new System.Security.Cryptography.HMACSHA256(keyBytes))
+                    {
+                        return hasher.ComputeHash(inputDataBytes);
+                    }
+            }
+        }
+
+        public byte[] Hash(KeyedHashAlgorithmName algName, byte[] inputDataBytes, out byte[] keyBytes)
+        {
+            switch (algName)
+            {
+                case KeyedHashAlgorithmName.HMACSHA512:
+                    using (System.Security.Cryptography.HMACSHA512 hasher = new System.Security.Cryptography.HMACSHA512())
+                    {
+                        keyBytes = hasher.Key;
+                        return hasher.ComputeHash(inputDataBytes);
+                    }
+                case KeyedHashAlgorithmName.HMACSHA256:
+                default:
+                    using (System.Security.Cryptography.HMACSHA256 hasher = new System.Security.Cryptography.HMACSHA256())
+                    {
+                        keyBytes = hasher.Key;
+                        return hasher.ComputeHash(inputDataBytes);
+                    }
+            }
+        }
+
+        public byte[] Hash(byte[] inputDataBytes, byte[] keyBytes)
+        {
+            return Hash(KeyedHashAlgorithmName.HMACSHA256, inputDataBytes, keyBytes);
+        }
+
+        public byte[] Hash(byte[] inputDataBytes, out byte[] keyBytes)
+        {
+            return Hash(KeyedHashAlgorithmName.HMACSHA256, inputDataBytes, out keyBytes);
+        }
+
+        public byte[] Hash(string inputString, byte[] keyBytes)
+        {
+            byte[] inputDataBytes = System.Text.Encoding.UTF8.GetBytes(inputString);
+            return Hash(inputDataBytes, keyBytes);
+        }
+
+        public byte[] Hash(string inputString, out byte[] keyBytes)
+        {
+            byte[] inputDataBytes = System.Text.Encoding.UTF8.GetBytes(inputString);
+            return Hash(inputDataBytes, out keyBytes);
+        }
+
         public enum HashAlgorithmName
         {
             MD5,
@@ -300,7 +367,6 @@ namespace Emptool.Cryptography
             return Hash(inputDataBytes);
         }
 
-
         public byte[] PasswordBasedKey(int keyLength, string password, out byte[] saltBytes, out int iterationCount)
         {
             saltBytes = new byte[32];               // 256 bits = 32 bytes
@@ -326,6 +392,8 @@ namespace Emptool.Cryptography
                 return pbk.GetBytes(keyLength);
             }
         }
+
+
     }
 
 
