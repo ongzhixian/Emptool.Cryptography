@@ -43,5 +43,46 @@ namespace Emptool.Cryptography
             //Console.WriteLine("Q        = [{0}]", Convert.ToBase64String(rsaParameters.Q));         // q                            // prime2
 
         }
+
+        //public static void ToJson(this System.Security.Cryptography.RSAParameters rsaParameters)
+        //{
+        //}
+
+        //public static System.Collections.Specialized.StringDictionary ToDictionary(this System.Security.Cryptography.RSAParameters rsaParameters)
+        //{
+        //    System.Collections.Specialized.StringDictionary d = new System.Collections.Specialized.StringDictionary();
+
+        //    d.Add("D", rsaParameters.D.ToBase64String());
+        //    d.Add("DP", rsaParameters.DP.ToBase64String());
+        //    d.Add("DQ", rsaParameters.DQ.ToBase64String());
+
+        //    d.Add("Exponent", rsaParameters.Exponent.ToBase64String());
+        //    d.Add("InverseQ", rsaParameters.InverseQ.ToBase64String());
+        //    d.Add("Modulus", rsaParameters.Modulus.ToBase64String());
+
+        //    d.Add("P", rsaParameters.P.ToBase64String());
+        //    d.Add("Q", rsaParameters.Q.ToBase64String());
+
+        //    return d;
+        //}
+
+        public static Dictionary<string, string> ToDictionary(this System.Security.Cryptography.RSAParameters rsaParameters)
+        {
+            Dictionary<string, string> d = new Dictionary<string, string>();
+            
+            d.Add("D", rsaParameters.D.ToBase64String());
+            d.Add("DP", rsaParameters.DP.ToBase64String());
+            d.Add("DQ", rsaParameters.DQ.ToBase64String());
+
+            d.Add("Exponent", rsaParameters.Exponent.ToBase64String());
+            d.Add("InverseQ", rsaParameters.InverseQ.ToBase64String());
+            d.Add("Modulus", rsaParameters.Modulus.ToBase64String());
+
+            d.Add("P", rsaParameters.P.ToBase64String());
+            d.Add("Q", rsaParameters.Q.ToBase64String());
+
+            return d;
+        }
+
     }
 }

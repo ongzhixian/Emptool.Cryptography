@@ -11,16 +11,16 @@ namespace Emptool.Cryptography
         // Random number generation
         // Generating a key from a password
 
-        System.Security.Cryptography.Aes aes;
-        System.Security.Cryptography.RSA rsa;
-        System.Security.Cryptography.SHA256 sha256;
-        System.Security.Cryptography.SHA512 sha512;
-        System.Security.Cryptography.HMACSHA256 hmac256;
-        System.Security.Cryptography.HMACSHA512 hmac512;
-        System.Security.Cryptography.RNGCryptoServiceProvider rng;
-        System.Security.Cryptography.Rfc2898DeriveBytes pbkdf;
+        //System.Security.Cryptography.Aes aes;
+        //System.Security.Cryptography.RSA rsa;
+        //System.Security.Cryptography.SHA256 sha256;
+        //System.Security.Cryptography.SHA512 sha512;
+        //System.Security.Cryptography.HMACSHA256 hmac256;
+        //System.Security.Cryptography.HMACSHA512 hmac512;
+        //System.Security.Cryptography.RNGCryptoServiceProvider rng;
+        //System.Security.Cryptography.Rfc2898DeriveBytes pbkdf;
 
-        Random rnd = new Random();
+        private Random rnd = new Random();
 
         //public dynamic Get(string algName)
         //{
@@ -57,17 +57,17 @@ namespace Emptool.Cryptography
 
 
 
-        public enum AlgorithmName
-        {
-            AES,
-            RSA,
-            SHA256,
-            SHA512,
-            HMACSHA256,
-            HMACSHA512,
-            RNG,
-            PBKDF
-        }
+        //public enum AlgorithmName
+        //{
+        //    AES,
+        //    RSA,
+        //    SHA256,
+        //    SHA512,
+        //    HMACSHA256,
+        //    HMACSHA512,
+        //    RNG,
+        //    PBKDF
+        //}
 
         private bool Valid(string algName)
         {
@@ -464,6 +464,8 @@ namespace Emptool.Cryptography
 
             // password-based key derivation functionality
             // Get password-based key
+            //System.Text.Encoding.Convert(System.Text.Encoding.Unicode, System.Text.Encoding.UTF8)
+            string a = "";
             
 
         }
