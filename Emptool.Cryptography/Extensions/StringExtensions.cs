@@ -28,5 +28,10 @@ namespace Emptool.Cryptography
         {
             return sha1.ComputeHash(Encoding.UTF8.GetBytes(inputString));
         }
+
+        public static string SHA1Base64String(this string inputString)
+        {
+            return Convert.ToBase64String(inputString.SHA1());
+        }
     }
 }
