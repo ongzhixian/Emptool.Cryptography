@@ -465,7 +465,7 @@ namespace Emptool.Cryptography
             // password-based key derivation functionality
             // Get password-based key
             //System.Text.Encoding.Convert(System.Text.Encoding.Unicode, System.Text.Encoding.UTF8)
-            string a = "";
+            //string a = "";
             
 
         }
